@@ -1,129 +1,110 @@
-﻿GRIS 2024
+# GRIS 2024
 
-NCE UFRJ E POLI UFRJ Rio de Janeiro, 2024
+**NCE UFRJ E POLI UFRJ**  
+Rio de Janeiro, 2024
 
-ENTENDENDOUMPOUCOMAISDOBLUE TEAM: SIEM E SOAR
+## ENTENDENDO UM POUCO MAIS DO BLUE TEAM: SIEM E SOAR
 
-*A better undestand of blue team: SIEM AND SOAR*
+*A Better Understanding of the Blue Team: SIEM AND SOAR*
 
-FREIRE, Fernanda
+**FREIRE, Fernanda**
 
-**RESUMO:**EstetrabalhoexploraasferramentasdeSIEM(SecurityInformationandEventMa‑ nagement) e SOAR (Security Orchestration, Automation, and Response), que sao cada vez mais utilizadas por empresas corporativas e governamentais para enfrentar ataques ciber‑ neticos. O objetivo e entender como essas ferramentas funcionam e como sao aplicadas na perspectiva do Blue Team, responsavel pela defesa cibernetica. A pesquisa segue um metodo qualitativo, de carater exploratorio, com uma abordagem analı́tico‑descritiva. Espera‑se que
+### RESUMO
+Este trabalho explora as ferramentas de SIEM (Security Information and Event Management) e SOAR (Security Orchestration, Automation, and Response), que são cada vez mais utilizadas por empresas corporativas e governamentais para enfrentar ataques cibernéticos. O objetivo é entender como essas ferramentas funcionam e como são aplicadas na perspectiva do Blue Team, responsável pela defesa cibernética. A pesquisa segue um método qualitativo, de caráter exploratório, com uma abordagem analítico-descritiva. Espera-se que o estudo forneça aos iniciantes uma compreensão mais clara sobre o papel dessas tecnologias na defesa cibernética, bem como ajude o Red Team a entender e explorar as estratégias de defesa do Blue Team para ataques direcionados.
 
-- estudo forneça aos iniciantes uma compreensao mais clara sobre o papel dessas tecnolo‑ gias na defesa cibernetica, bem como ajude o Red Team a entender e explorar as estrategias de defesa do Blue Team para ataques direcionados.
+**Palavras-chave**: SIEM, SOAR, Cibersegurança, Blue Team, Estratégias Defensivas, Operações de Segurança, Resposta a Incidentes, Detecção de Ameaças, Automação de Segurança
 
-  **Palavras‑chave**: SIEM, SOAR, Cibersegurança, Blue Team, Estrategias Defensivas, Operaçoes de Segurança, Resposta a Incidentes, Detecçao de Ameaças, Automaçao de Segurança
+### ABSTRACT
+*This paper explores SIEM (Security Information and Event Management) and SOAR (Security Orchestration, Automation, and Response) tools, which are increasingly used by corporate and government organizations to counter cyberattacks. The objective is to gain a better understanding of how these tools operate and are applied from the perspective of the Blue Team, responsible for cybersecurity defense. The research follows a qualitative, exploratory method with an analytical-descriptive approach. The expected outcome is to provide beginners with a clearer understanding of the role of these technologies in cybersecurity defense, as well as to help the Red Team comprehend and exploit Blue Team defense strategies for targeted attacks.*
 
-  **ABSTRACT:***ThispaperexploresSIEM(SecurityInformationandEventManagement)andSOAR (Security Orchestration, Automation, and Response) tools, which are increasingly used by cor‑ porate and government organizations to counter cyberattacks. The objective is to gain a better understandingofhowthesetoolsoperateandareappliedfromtheperspectiveoftheBlueTeam, responsible for cybersecurity defense. The research follows a qualitative, exploratory method with an analytical‑descriptive approach. The expected outcome is to provide beginners with a clearer understanding of the role of these technologies in cybersecurity defense, as well as to help the Red Team comprehend and exploit Blue Team defense strategies for targeted attacks.*
+**Keywords**: SIEM, SOAR, Cybersecurity, Blue Team, Defensive Strategies, Security Operations, Incident Response, Threat Detection, Security Automation
 
-  **Keywords**: SIEM, SOAR, Cybersecurity, Blue Team, Defensive Strategies, Security Operations, Incident Response, Threat Detection, Security Automation
+---
 
-FREIRE. Aprofundando conhecimentos no SIEM E SOAR
+### 1 — O que é um SIEM?
 
-1 — O que e um SIEM?
+O SIEM (Security Information and Event Management) é uma ferramenta essencial para a gestão de segurança da informação em ambientes corporativos. De maneira simplificada, o SIEM atua como um gerenciador de logs e dados, permitindo o monitoramento centralizado de eventos de segurança provenientes de diversas fontes dentro de uma rede. Isso fornece ao Centro de Operações de Segurança (SOC) uma visão abrangente e consolidada do que está acontecendo em um ambiente de TI, facilitando a detecção e resposta a incidentes de segurança.
 
-O SIEM (Security Information and Event Management) e uma ferramenta essencial para a gestao de segurança da informaçao em ambientes corporativos. De maneira simpli  icada, o SIEM atua como um gerenciador de logs e dados, permitindo o monitoramento centralizado de eventos de segurança provenientes de diversas fontes dentro de uma rede. Isso fornece ao Centro de Operaçoes de Segurança (SOC) uma visao abrangente e consolidada do que esta acontecendo em um ambiente de TI, facilitando a detecçao e resposta a incidentes de segu‑ rança.
+#### 1.1 — Como recebe os dados?
 
-1. **— Como recebe os dados?**
+Os logs e eventos de segurança chegam ao SIEM a partir de diferentes **log sources** (fontes de logs), que podem incluir servidores, dispositivos de rede, aplicativos, e outros sistemas que geram eventos relevantes para a segurança. Essas fontes de logs são configuradas para enviar dados para o SIEM, geralmente através de coletores ou agentes instalados em servidores específicos.
 
-Os logs e eventos de segurança chegam ao SIEM a partir de diferentes **log sources** (fontes de logs), que podem incluir servidores, dispositivos de rede, aplicativos, e outros sistemas que geram eventos relevantes para a segurança. Essas fontes de logs sao con  iguradas para en‑ viar dados para o SIEM, geralmente atraves de coletores ou agentes instalados em servidores especı́  icos.
+Os **coletores de logs** são responsáveis por receber e processar eventos de segurança antes de encaminhá-los ao SIEM. Eles são configurados para especificar quais tipos de eventos devem ser coletados, qual o destino desses logs (como o servidor do SIEM), e quais fontes de logs estão sendo monitoradas. Em ambientes Windows, essa comunicação geralmente ocorre através da porta 514, utilizando tanto os protocolos TCP quanto UDP. O bloqueio dessa porta pode resultar na falha do envio de logs para o SIEM, comprometendo a visibilidade do SOC sobre a rede, enquanto a porta 8413 é usada para atualizações e configurações dos eventos, como mostrado no diagrama:
 
-Os **coletores de logs** sao responsaveis por receber e processar eventos de segurança antes de encaminha‑los ao SIEM. Eles sao con  igurados para especi  icar quais tipos de eventos de‑ vem ser coletados, qual o destino desses logs (como o servidor do SIEM), e quais fontes de logsestaosendomonitoradas. EmambientesWindows,essacomunicaçaogeralmenteocorre atraves da porta 514, utilizando tanto os protocolos TCP quanto UDP. O bloqueio dessa porta pode resultar na falha do envio de logs para o SIEM, comprometendo a visibilidade do SOC sobre a rede, ja a porta 8413 e usada para atualizaçoes e con  iguraçoes dos eventos, segue diagrama:
+![Conexão SIEM com Windows Collector](Aspose.Words.98b8cb65-d908-4889-bd86-411e33bf9817.001.png)
 
-![](Aspose.Words.98b8cb65-d908-4889-bd86-411e33bf9817.001.png)
+**Figura 1: Conexão SIEM com Windows Collector. Crédito: IBM**
 
-Figura 1: Conexao SIEM com Windows Collector. Credito: IBM
+Os eventos de segurança do Windows que são recomendados para monitoramento, de acordo com a Microsoft, são descritos [aqui](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor).
 
-Os eventos de segurança do windows que sao recomendados monitorar de acordo com a Microsoft sao descritos [aqui](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor).
+Além da coleta tradicional de logs através de agentes e coletores, o SIEM também pode receber dados via APIs, o que é comum em integrações com antivírus, sistemas de prevenção de intrusão (IPS) e firewalls. Essas integrações permitem que o SIEM agregue uma ampla gama de dados de segurança, oferecendo uma visão holística do ambiente de TI.
 
-Alem da coleta tradicional de logs atraves de agentes e coletores, o SIEM tambem pode rece‑ ber dados via APIs, o que e comum em integraçoes com antivı́rus, sistemas de prevençao de intrusao (IPS), e  irewalls. Essas integraçoes permitem que o SIEM agregue uma ampla gama de dados de segurança, oferecendo uma visao holı́stica do ambiente de TI.
+Em ambientes de serviços web, a eficácia do SIEM depende significativamente da integração com dispositivos de rede críticos, como firewalls, proxies e sistemas de prevenção de intrusão (IPS). Isso ocorre porque, em muitos casos, o SIEM não tem acesso direto aos logs dos servidores onde as tentativas maliciosas podem ocorrer. Esses servidores, frequentemente hospedados em ambientes de nuvem gerenciados por terceiros, podem ter restrições em relação ao compartilhamento de logs com ferramentas externas.
 
-Em ambientes de serviços web, a e  icacia do SIEM (Security Information and Event Mana‑ gement) depende signi  icativamente da integraçao com dispositivos de rede crı́ticos, como   irewalls, proxies e sistemas de prevençao de intrusao (IPS). Isso ocorre porque, em muitos casos, o SIEM nao tem acesso direto aos logs dos servidores onde as tentativas maliciosas podem ocorrer. Esses servidores, frequentemente hospedados em ambientes de nuvem ge‑ renciados por terceiros, podem ter restriçoes em relaçao ao compartilhamento de logs com ferramentas externas.
+Nesses casos, para realizar uma monitoração mais detalhada e obter acesso aos logs específicos dos servidores, pode ser necessário entrar em contato diretamente com o provedor de serviços de nuvem. Eles podem oferecer soluções alternativas, como o envio de logs através de APIs ou a configuração de serviços adicionais que permitam a exportação dos logs para o SIEM da empresa.
 
-Nesses casos, para realizar uma monitoraçao mais detalhada e obter acesso aos logs especı́‑   icos dos servidores, pode ser necessario entrar em contato diretamente com o provedor de serviços de nuvem. Eles podem oferecer soluçoes alternativas, como o envio de logs atraves de APIs ou a con  iguraçao de serviços adicionais que permitem a exportaçao dos logs para o SIEM da empresa.
+### 2 — O que fazer a partir de agora?
 
-2. **— O que fazer apartir de agora?**
+Se você já tem o seu SIEM recebendo eventos e fluxos de acordo com o configurado, você já pode monitorar um ambiente e detectar possíveis ameaças, correlacionando diversos componentes.
 
-Se voce ja tem o seu siem recebendo eventos e  lows de acordo com os con  igurados, voce ja pode monitorar um ambiente e detectar possiveis ameaças, relacionando diversos compo‑ nentes.
+O SIEM é, e deve ser, uma das principais ferramentas de correlação de eventos de segurança na atualidade. Essa correlação é o ponto chave do SIEM, pois permite que diferentes eventos e dados de várias fontes sejam relacionados, identificando padrões que isoladamente poderiam passar despercebidos. Ao correlacionar eventos, o SIEM ajuda a descobrir atividades maliciosas que, sem essa análise integrada, poderiam ser vistas como eventos isolados e inofensivos.
 
-O SIEM e, e deve ser, uma das principais ferramentas de correlaçao de eventos de segurança na atualidade. Essa correlaçao e o ponto chave do SIEM, pois permite que diferentes eventos e dados de varias fontes sejam relacionados, identi  icando padroes que isoladamente pode‑ riam passar despercebidos. Ao correlacionar eventos, o SIEM ajuda a descobrir atividades maliciosas que, sem essa analise integrada, poderiam ser vistas como eventos isolados e ino‑ fensivos.
+Embora apenas monitorar os eventos seja um primeiro passo importante, não é suficiente para detectar e reagir a ameaças de forma eficaz. É necessário configurar casos de uso específicos que guiem o SIEM na correlação de eventos relevantes para gerar alertas significativos. Existem, inclusive, diversas fontes que já oferecem casos de uso prontos para serem importados, o que pode facilitar o processo inicial de configuração. No entanto, é importante lembrar que, além desses casos prontos, muitos fornecedores de SIEM e segurança também oferecem casos de uso pré-configurados que são confidenciais e fornecem uma proteção adicional, sem serem amplamente divulgados.
 
-Embora apenas monitorar os eventos seja um primeiro passo importante, nao e su  iciente para detectar e reagir a ameaças de forma e  icaz. E   necessario con  igurar casos de uso espe‑ cı́  icosqueguiemoSIEMnacorrelaçaodeeventosrelevantesparageraralertassigni  icativos. Existem, inclusive, diversasfontesquejaoferecemcasosdeusoprontosparaseremimporta‑ dos, oquepodefacilitaroprocessoinicialdecon  iguraçao. Noentanto, eimportantelembrar que, alem desses casos prontos, muitos fornecedores de SIEM e segurança tambem oferecem casosdeusopre‑con  iguradosquesaocon  idenciaisefornecemumaproteçaoadicional,sem serem amplamente divulgados.
+#### 2.1 Exemplo de correlação simples
 
-**1.2.1 Exemplo de correção simples**
+A combinação de eventos, que individualmente poderiam ser considerados inofensivos ou rotineiros, pode levantar uma bandeira vermelha quando correlacionados. O SIEM pode gerar um alerta de alta prioridade para que a equipe de segurança investigue essa atividade, prevenindo um possível comprometimento do sistema. Um exemplo disso seria o seguinte cenário:
 
-A combinaçao de eventos, que individualmente poderiam ser considerados inofensivos ou rotineiros, pode levantar uma bandeira vermelha quando correlacionados. O SIEM pode ge‑ rar um alerta de alta prioridade para que a equipe de segurança investigue essa atividade, prevenindo um possıvel comprometimento do sistema. Um exemplo disso seria o seguinte cenario:
+Um logon bem-sucedido (Event ID 4624) é registrado para uma conta de administrador em um servidor crítico às 3h da manhã. Pouco depois, no mesmo servidor, o sistema registra um evento de alteração de permissão (Event ID 4670) em um arquivo sensível, sugerindo que a conta pode estar sendo usada para modificar configurações de segurança. Simultaneamente, o firewall do servidor detecta e bloqueia múltiplas tentativas de conexão remota à porta 3389, vindas de um endereço IP externo não autorizado.
 
-Um logon bem‑sucedido (Event ID 4624) e registrado para uma conta de administrador em
+Isoladamente, cada um desses eventos poderia parecer uma ação comum e cotidiana em um ambiente corporativo. O Event ID 4624, por exemplo, indica apenas um logon bem-sucedido em um sistema Windows, o que pode ocorrer a qualquer momento, dependendo das políticas da empresa. Alterações em arquivos críticos, como modificações em pastas protegidas, também podem ser ações legítimas realizadas por ferramentas de segurança, como cofres de senha, sem indicar necessariamente uma ameaça. Da mesma forma, tentativas de conexão de um IP externo não autorizado, seguidas de bloqueios pelo firewall, são eventos corriqueiros e geralmente não alarmantes.
 
-um servidor crı́tico as 3h da manha. Pouco depois, no mesmo servidor, o sistema registra um evento de alteraçao de permissao (Event ID 4670) em um arquivo sensıvel, sugerindo que a conta pode estar sendo usada para modi  icar con  iguraçoes de segurança. Simultaneamente,
+No entanto, quando esses eventos ocorrem no mesmo servidor e em um intervalo de tempo curto, o SIEM tem a capacidade de correlacioná-los e detectar um padrão suspeito. A ocorrência de um logon administrativo em um horário incomum, seguido de uma alteração em arquivos críticos e tentativas de conexão remota bloqueadas, pode indicar que a conta de administrador foi comprometida. O SIEM, ao correlacionar esses eventos aparentemente isolados, gera um alerta de alta prioridade, destacando um potencial incidente de segurança que poderia passar despercebido sem essa análise integrada.
 
-- irewalldoservidordetectaebloqueiamultiplastentativasdeconexaoremotaaporta3389, vindas de um endereço IP externo nao autorizado.
+### 3 — O que é um SOAR?
 
-  Isoladamente, cada um desses eventos poderia parecer uma açao comum e cotidiana em um ambiente corporativo. O Event ID 4624, por exemplo, indica apenas um logon bem‑sucedido em um sistema Windows, o que pode ocorrer a qualquer momento, dependendo das polı́ti‑ cas da empresa. Alteraçoes em arquivos crı́ticos, como modi  icaçoes em pastas protegidas, tambem podem ser açoes legı́timas realizadas por ferramentas de segurança, como cofres de senha, semindicarnecessariamenteumaameaça. Damesmaforma,tentativasdeconexaode um IP externo nao autorizado, seguidas de bloqueios pelo  irewall, sao eventos corriqueiros e geralmente nao alarmantes.
+O SOAR (Security Orchestration, Automation, and Response) é uma ferramenta essencial na gestão de segurança da informação, especialmente em ambientes corporativos onde a complexidade e o volume de incidentes são altos. De maneira simplificada, o SOAR automatiza e orquestra tarefas de segurança, integrando diversos sistemas e ferramentas de segurança para facilitar a detecção, investigação e resposta a incidentes.
 
-  No entanto, quando esses eventos ocorrem no mesmo servidor e em um intervalo de tempo curto, o SIEM tem a capacidade de correlaciona‑los e detectar um padrao suspeito. A ocor‑ rencia de um logon administrativo em um horario incomum, seguido de uma alteraçao em arquivos crı́ticos e tentativas de conexao remota bloqueadas, pode indicar que a conta de ad‑ ministrador foi comprometida. O SIEM, ao correlacionar esses eventos aparentemente isola‑ dos, gera um alerta de alta prioridade, destacando um potencial incidente de segurança que poderia passar despercebido sem essa analise integrada.
+Com o SOAR, o Centro de Operações de Segurança (SOC) pode automatizar respostas a ameaças, reduzir o tempo de reação e melhorar a eficiência operacional. Além disso, o SOAR permite que as equipes de segurança criem fluxos de trabalho personalizados que automatizam processos repetitivos, possibilitando uma gestão mais ágil e eficaz dos incidentes. Em resumo, o SOAR não apenas centraliza as operações de segurança, mas também as torna mais rápidas e consistentes, aliviando a carga sobre os analistas e permitindo um foco maior em ameaças complexas e estratégicas.
 
-  2 — O que e um SOAR?
+#### 3.1 Como é seu funcionamento?
 
-  O SOAR (Security Orchestration, Automation, and Response) e uma ferramenta essencial na gestao de segurança da informaçao, especialmente em ambientes corporativos onde a com‑ plexidade e o volume de incidentes sao altos. De maneira simpli  icada, o SOAR automatiza e orquestra tarefas de segurança, integrando diversos sistemas e ferramentas de segurança para facilitar a detecçao, investigaçao, e resposta a incidentes.
+##### 3.1.1 Security Orchestration - Orquestração de segurança
 
-  Com o SOAR, o Centro de Operaçoes de Segurança (SOC) pode automatizar respostas a ame‑ aças, reduzir o tempo de reaçao e melhorar a e  iciencia operacional. Alem disso, o SOAR permite que as equipes de segurança criem  luxos de trabalho personalizados que automa‑ tizam processos repetitivos, possibilitando uma gestao mais agil e e  icaz dos incidentes. Em resumo,oSOARnaoapenascentralizaasoperaçoesdesegurança,mastambemastornamais rapidas e consistentes, aliviando a carga sobre os analistas e permitindo um foco maior em ameaças complexas e estrategicas.
-
-  **2.1 Como é seu funcionamento?**
-
-  **2.1.1 Security Orquestration ‑ Orquestração de segurança**
-
-  OSOdeSOARsurgeapartirdaorquestraçaodesegurança,queepossibilitadapelaintegraçao e automaçao das ferramentas de segurança atraves de APIs. Isso abre a possibilidade para que a propria ferramenta faça alteraçoes nas soluçoes de segurança, como em casos de blo‑ queio. Esse processo ocorre por meio da criaçao de playbooks automatizados, que de  inem as açoes que um analista do SOC tomaria em determinadas situaçoes. A partir das conexoes via API, a ferramenta segue esses passos automaticamente.
-
-  Um caso exemplo seria, de acordo com a IBM:
-
-”Um analista de segurança que investiga um e‑mail de phishing pode precisar de um gateway de e‑mail seguro, uma plataforma de inteligencia de ameaças e um software antivı́rus para identi  icar, entender e resolver a ameaça. Essas fer‑ ramentas geralmente vem de fornecedores diferentes e podem nao se integrar prontamente; portanto, os analistas devem se mover manualmente entre as fer‑ ramentas enquanto trabalham. Com um SOAR, os SOCs podem uni  icar essas fer‑ ramentas em  luxos de trabalho de operaçoes de segurança (SecOps) coerentes e repetı́veis”. (IBM, 2023)
-
-Nesse caso, o playbook poderia ser assionado e ter feito o trabalho do analista de alterar as ferramentas, ja entregando as saidas em apenas uma tela.
-
-Janotamosnocasoacimaaaplicaçaodaautomaçao,poremalemdisso,eletambemecapazde abrir e fechar tickets em ferramentas de gerenciamento de tickets tambem com a utilizaçao de playbooks.
+O SO de SOAR surge a partir da orquestração de segurança, que é possibilitada pela integração e automação das ferramentas de segurança através de APIs. Isso abre a possibilidade para que a própria ferramenta faça alterações nas soluções de segurança, como em casos de bloqueio. Esse processo ocorre por meio da criação de playbooks automatizados, que definem as ações que um analista do SOC tomaria em determinadas situações. A partir das conexões via API, a ferramenta segue esses passos automaticamente.
 
 Um caso exemplo seria, de acordo com a IBM:
 
-”Porexemplo, imagine como umaplataformaSOARpodeautomatizaruma inves‑ tigaçaodeumnotebookcomprometido. Aprimeiraindicaçaodequealgoestaer‑ rado vem de uma soluçao de detecçao e resposta de endpoint (EDR), que detecta atividades suspeitas no notebook. O EDR envia um alerta ao SOAR, que aciona
+> "Um analista de segurança que investiga um e-mail de phishing pode precisar de um gateway de e-mail seguro, uma plataforma de inteligência de ameaças e um software antivírus para identificar, entender e resolver a ameaça. Essas ferramentas geralmente vêm de fornecedores diferentes e podem não se integrar prontamente; portanto, os analistas devem se mover manualmente entre as ferramentas enquanto trabalham. Com um SOAR, os SOCs podem unificar essas ferramentas em fluxos de trabalho de operações de segurança (SecOps) coerentes e repetíveis." (IBM, 2023)
 
-- SOAR para executar um playbook prede  inido. Primeiro, o SOAR abre um tic‑ ket para o incidente. Ele enriquece o alerta com dados de feeds integrados de inteligencia de ameaças e outras ferramentas de segurança. Em seguida, o SOAR executa respostas automatizadas, como acionar uma ferramenta de detecçao e resposta de rede (NDR) para colocar o endpoint em quarentena ou solicitar que
-- software antivı́rus encontre e detone o malware. Por  im, o SOAR passa o ticket para um analista de segurança, que determina se o incidente foi resolvido ou se e necessaria intervençao humana.”. (IBM, 2023)
+Nesse caso, o playbook poderia ser acionado e ter feito o trabalho do analista de alterar as ferramentas, já entregando os resultados em apenas uma tela.
 
-Como observado, a resposta de incidentes se torna mais pratica e tambem mais tunelada de falsos positivos encontrados. o SOAR torna o SOC ainda mais assertivo e facilita a visao do mesmosemanecessidadedemutiplasferramentasabertasparaaresoluçaodeumincidente.
+Já notamos no caso acima a aplicação da automação, porém, além disso, ele também é capaz de abrir e fechar tickets em ferramentas de gerenciamento de tickets com a utilização de playbooks.
 
-3 SIEM vs SOAR
+Um caso exemplo seria, de acordo com a IBM:
 
-Vale ressaltar que ambos tem objetivos diferentes. O SIEM tem como objetivo relacionar eventos e gerar alertas a partir de suas correlaçoes, ja o SOAR considera a automaçao de work  lows, diminuindo a necessidade de açoes manuais.
+> "Por exemplo, imagine como uma plataforma SOAR pode automatizar uma investigação de um notebook comprometido. A primeira indicação de que algo está errado vem de uma solução de detecção e resposta de endpoint (EDR), que detecta atividades suspeitas no notebook. O EDR envia um alerta ao SOAR, que aciona o SOAR para executar um playbook predefinido. Primeiro, o SOAR abre um ticket para o incidente. Ele enriquece o alerta com dados de feeds integrados de inteligência de ameaças e outras ferramentas de segurança. Em seguida, o SOAR executa respostas automatizadas, como acionar uma ferramenta de detecção e resposta de rede (NDR) para colocar o endpoint em quarentena ou solicitar que o software antivírus encontre e detone o malware. Por fim, o SOAR passa o ticket para um analista de segurança, que determina se o incidente foi resolvido ou se é necessária intervenção humana." (IBM, 2023)
 
-Alem disso, o SIEM pode receber logs de segurança de todos os dispositivos conectados na rede, sejam eles dispositivos de segurança ou nao. Ja o SOAR e focado em dispositivos de segurança a qual o permite realizar a conexao via API, e realizar açoes automatizadas via playbooks.
+Como observado, a resposta de incidentes se torna mais prática e também mais refinada, reduzindo a ocorrência de falsos positivos. O SOAR torna o SOC ainda mais assertivo e facilita a visão do mesmo, sem a necessidade de múltiplas ferramentas abertas para a resolução de um incidente.
 
-Enquantoumefocadonadescobertadenovasvulnerabilidadesoupossibilidadesdeataques,
+### 4 — SIEM vs SOAR
 
-- outro se concentra na tratativa aprimorada desses casos. Considerando isso, e possivel dizer que o melhor cenario nunca sera ter um ou o outro mas sim a integraçao entre os dois casos, aumentando o nivel de segurança da empresa.
+Vale ressaltar que ambos têm objetivos diferentes. O SIEM tem como objetivo relacionar eventos e gerar alertas a partir de suas correlações, enquanto o SOAR considera a automação de workflows, diminuindo a necessidade de ações manuais.
 
-  4 — Conclusoes
+Além disso, o SIEM pode receber logs de segurança de todos os dispositivos conectados na rede, sejam eles dispositivos de segurança ou não. Já o SOAR é focado em dispositivos de segurança, os quais permite realizar a conexão via API, e realizar ações automatizadas via playbooks.
 
-  Em um cenario onde as ameaças ciberneticas estao em constante evoluçao, as ferramentas de SIEM e SOAR desempenham papeis complementares e essenciais para a segurança da in‑ formaçao. O SIEM, com sua capacidade de correlaçao e analise de eventos, fornece uma visao abrangentedoambientedeTI,permitindoadetecçaoprecocedepotenciaisameaças. Porou‑ tro lado, o SOAR nao apenas automatiza e orquestra a resposta a esses eventos, mas tambem permite que as equipes de segurança reduzam o tempo de resposta e aprimorem a e  iciencia operacional.
+Enquanto um é focado na descoberta de novas vulnerabilidades ou possibilidades de ataques, o outro se concentra na tratativa aprimorada desses casos. Considerando isso, é possível dizer que o melhor cenário nunca será ter um ou o outro, mas sim a integração entre os dois, aumentando o nível de segurança da empresa.
 
-  Aocombinar as capacidades analı́ticasdo SIEM com a automaçao e orquestraçao do SOAR,as organizaçoes podem criar uma defesa cibernetica robusta e e  iciente. Essa integraçao per‑ mite que os SOCs nao apenas identi  iquem e respondam rapidamente a incidentes, mas tam‑ bem otimizem seus  luxos de trabalho, minimizando a carga manual sobre os analistas e re‑ duzindo a possibilidade de erros humanos.
+### 5 — Conclusões
 
-  Portanto, em vez de escolher entre SIEM e SOAR, a abordagem mais e  icaz e utilizar ambos em conjunto. Isso oferece uma soluçao de segurança mais completa, onde a detecçao rapida de ameaças e seguida por uma resposta agil e automatizada, garantindo a proteçao contı́nua e e  icaz do ambiente corporativo. Este estudo destaca a importancia dessa integraçao, for‑ necendo uma compreensao clara de como essas tecnologias se complementam e se reforçam mutuamente na defesa contra ataques ciberneticos.
+Em um cenário onde as ameaças cibernéticas estão em constante evolução, as ferramentas de SIEM e SOAR desempenham papéis complementares e essenciais para a segurança da informação. O SIEM, com sua capacidade de correlação e análise de eventos, fornece uma visão abrangente do ambiente de TI, permitindo a detecção precoce de potenciais ameaças. Por outro lado, o SOAR não apenas automatiza e orquestra a resposta a esses eventos, mas também permite que as equipes de segurança reduzam o tempo de resposta e aprimorem a eficiência operacional.
 
-  Referencias
+Ao combinar as capacidades analíticas do SIEM com a automação e orquestração do SOAR, as organizações podem criar uma defesa cibernética robusta e eficiente. Essa integração permite que os SOCs não apenas identifiquem e respondam rapidamente a incidentes, mas também otimizem seus fluxos de trabalho, minimizando a carga manual sobre os analistas e reduzindo a possibilidade de erros humanos.
 
-  Stellar Cyber. *SIEM vs. SOAR: What’s the Difference?*. Disponıvel em: [<https://stellarcyber. ai/learn/siem‑vs‑soar/>](https://stellarcyber.ai/learn/siem-vs-soar/).
+Portanto, em vez de escolher entre SIEM e SOAR, a abordagem mais eficaz é utilizar ambos em conjunto. Isso oferece uma solução de segurança mais completa, onde a detecção rápida de ameaças é seguida por uma resposta ágil e automatizada, garantindo a proteção contínua e eficaz do ambiente corporativo. Este estudo destaca a importância dessa integração, fornecendo uma compreensão clara de como essas tecnologias se complementam e se reforçam mutuamente na defesa contra ataques cibernéticos.
 
-  IBM. *QRadar SOAR*. Disponıvel em: [<https://www.ibm.com/br‑pt/products/qradar‑soar>](https://www.ibm.com/br-pt/products/qradar-soar).
+### Referências
 
-  IBM. *Deploying managed QRadar WinCollect agents: QRadar WinCollect Troubleshooting Open Mic*. Disponıvel em: [<https://learn.ibm.com/mod/url/view.php?id=283628& forceview=1>](https://learn.ibm.com/mod/url/view.php?id=283628&forceview=1).
-
-  IBM. *Deploying QRadar WinCollect*. Disponıvel em: [<https://learn.ibm.com/mod/hvp/view. php?id=283627#collapse2>](https://learn.ibm.com/mod/hvp/view.php?id=283627#collapse2).
-
-  IBM. *O que é SOAR (orquestração de segurança, automação e resposta)?*. Disponıvel em: [<https://www.ibm.com/br‑pt/topics/security‑orchestration‑automation‑response>](https://www.ibm.com/br-pt/topics/security-orchestration-automation-response). IBM, 2023.
-
-  Microsoft. *Appendix L: Events to Monitor*. Disponıvel em: [<https://learn.microsoft.com/ en‑us/windows‑server/identity/ad‑ds/plan/appendix‑l‑‑events‑to‑monitor>](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/appendix-l--events-to-monitor).
-
-  . . . . . . . . . . . . . . . . .
-Grupo de Respostas a Incidentes de Segurança ‑ 2024 UFRJ 2024
+- Stellar Cyber. *SIEM vs. SOAR: What’s the Difference?*. Disponível em: [https://stellarcyber.ai/learn/siem-vs-soar/](https://stellarcyber.ai/learn/siem-vs-soar/).
+- IBM. *QRadar SOAR*. Disponível em: [https://www.ibm.com/br-pt/products/qradar-soar](https://www.ibm.com/br-pt/products/qradar-soar).
+- IBM. *Deploying managed QRadar WinCollect agents: QRadar WinCollect Troubleshooting Open Mic*. Disponível em: [https://learn.ibm.com/mod/url/view.php?id=283628&forceview=1](https://learn.ibm.com/mod/url/view.php?id=283628&forceview=1).
